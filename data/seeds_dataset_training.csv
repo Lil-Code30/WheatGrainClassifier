@@ -1,4 +1,4 @@
-variety;Area;Perimeter;Compactness;Kernel_Length;Kernel_Width;Asymmetry_Coefficient;Groove_Length
+Variety;Area;Perimeter;Compactness;Kernel_Length;Kernel_Width;Asymmetry_Coefficient;Groove_Length
 Kama;13.94;14.17;0.8728;5.585;3.15;2.124;5.012
 Kama;13.45;14.02;0.8604;5.516;3.065;3.531;5.097
 Kama;14.16;14.4;0.8584;5.658;3.129;3.072;5.176

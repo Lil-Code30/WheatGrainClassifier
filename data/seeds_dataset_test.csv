@@ -1,4 +1,4 @@
-variety;Area;Perimeter;Compactness;Kernel_Length;Kernel_Width;Asymmetry_Coefficient;Groove_Length
+Variety;Area;Perimeter;Compactness;Kernel_Length;Kernel_Width;Asymmetry_Coefficient;Groove_Length
 Canadian;12.37;13.47;0.8567;5.204;2.96;3.919;5.001
 Canadian;12.3;13.34;0.8684;5.243;2.974;5.637;5.063
 Kama;11.42;12.86;0.8683;5.008;2.85;2.7;4.607
