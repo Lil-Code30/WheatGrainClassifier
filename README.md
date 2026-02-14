@@ -12,6 +12,30 @@ Install-Package Spectre.Console
 
 ```
 
+## Distance Metrics Used in KNN Algorithm
+KNN uses distance metrics to identify nearest neighbor, these neighbors are used for classification and regression task. To identify nearest neighbor we use below distance metrics:
+
+### 1. Euclidean Distance
+
+Euclidean distance is defined as the straight-line distance between two points in a plane or space.  
+You can think of it like the shortest path you would walk if you were to go directly from one point to another.
+
+$$
+\text{distance}(x, X_i) = \sqrt{\sum_{j=1}^{d} (x_j - X_{ij})^2}
+$$
+
+---
+
+### 2. Manhattan Distance
+
+This is the total distance you would travel if you could only move along horizontal and vertical lines like a grid or city streets.  
+It’s also called **"taxicab distance"** because a taxi can only drive along the grid-like streets of a city.
+
+$$
+d(x, y) = \sum_{i=1}^{n} |x_i - y_i|
+$$
+
+> Source : [https://www.geeksforgeeks.org/machine-learning/k-nearest-neighbours/](https://www.geeksforgeeks.org/machine-learning/k-nearest-neighbours/)
 
 ## Modélisation UML pour la classification k-NN
 
@@ -25,7 +49,7 @@ classDiagram
         +Label predict(WheatGrain sample)
         -List~WheatGrain~ findKNearestNeighbors(WheatGrain sample)
     }
-
+    +
     class WheatGrain {
         -double Area
         -double Perimeter
