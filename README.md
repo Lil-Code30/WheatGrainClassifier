@@ -12,7 +12,79 @@ Install-Package Spectre.Console
 
 ```
 
+
+## Modélisation UML pour la classification k-NN
+
+```mermaid
+classDiagram
+    class KNNClassifier {
+        -int k
+        -IDistanceMetric distanceMetric
+        -List~WheatGrain~ trainingData
+        +KNNClassifier(int k, IDistanceMetric metric)
+        +Label predict(WheatGrain sample)
+        -List~WheatGrain~ findKNearestNeighbors(WheatGrain sample)
+    }
+
+    class WheatGrain {
+        <<abstract>>
+        -double Area
+        -double Perimeter
+        -double Compactness
+        -double LengthOfKernel
+        -double WidthOfKernel
+        -double AsymmetryCoefficient
+        -double LengthOfKernelGroove
+        +double[] ToFeatureVector()
+        +GrainType GetGrainType()*
+    }
+
+    class Kama {
+        +GrainType GetGrainType()
+    }
+
+    class Rosa {
+        +GrainType GetGrainType()
+    }
+
+    class Canadian {
+        +GrainType GetGrainType()
+    }
+
+    class GrainType {
+        <<enumeration>>
+        Kama
+        Rosa
+        Canadian
+    }
+
+    class IDistanceMetric {
+        <<Interface>>
+        +double calculate(WheatGrain a, WheatGrain b)
+    }
+
+    class EuclideanDistance {
+        +double calculate(WheatGrain a, WheatGrain b)
+    }
+
+    class ManhattanDistance {
+        +double calculate(WheatGrain a, WheatGrain b)
+    }
+
+  
+    KNNClassifier --> IDistanceMetric : delegates to
+    KNNClassifier --> WheatGrain : receives
+    EuclideanDistance ..|> DistanceMetric
+    ManhattanDistance ..|> DistanceMetric
+    WheatGrain <|-- Kama
+    WheatGrain <|-- Rosa
+    WheatGrain <|-- Canadian
+    WheatGrain --> GrainType : returns
+```
+
 ## Farm Management System Architecture
+
+> Note : This is not implemented in the code just for learning purpose
 
 ```mermaid
 classDiagram
