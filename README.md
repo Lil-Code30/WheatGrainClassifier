@@ -27,7 +27,6 @@ classDiagram
     }
 
     class WheatGrain {
-        <<abstract>>
         -double Area
         -double Perimeter
         -double Compactness
@@ -35,20 +34,9 @@ classDiagram
         -double WidthOfKernel
         -double AsymmetryCoefficient
         -double LengthOfKernelGroove
+        -GrainType? Variety
         +double[] ToFeatureVector()
-        +GrainType GetGrainType()*
-    }
-
-    class Kama {
-        +GrainType GetGrainType()
-    }
-
-    class Rosa {
-        +GrainType GetGrainType()
-    }
-
-    class Canadian {
-        +GrainType GetGrainType()
+        
     }
 
     class GrainType {
@@ -74,8 +62,8 @@ classDiagram
   
     KNNClassifier --> IDistanceMetric : delegates to
     KNNClassifier --> WheatGrain : receives
-    EuclideanDistance ..|> DistanceMetric
-    ManhattanDistance ..|> DistanceMetric
+    EuclideanDistance ..|> IDistanceMetric
+    ManhattanDistance ..|> IDistanceMetric
     WheatGrain <|-- Kama
     WheatGrain <|-- Rosa
     WheatGrain <|-- Canadian
