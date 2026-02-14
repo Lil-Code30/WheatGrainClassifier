@@ -64,9 +64,6 @@ classDiagram
     KNNClassifier --> WheatGrain : receives
     EuclideanDistance ..|> IDistanceMetric
     ManhattanDistance ..|> IDistanceMetric
-    WheatGrain <|-- Kama
-    WheatGrain <|-- Rosa
-    WheatGrain <|-- Canadian
     WheatGrain --> GrainType : returns
 ```
 
