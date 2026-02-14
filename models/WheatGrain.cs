@@ -3,26 +3,22 @@ namespace WheatGrainClassifier.models;
 
 public class WheatGrain
 {
-    // variety;Area;Perimeter;Compactness;Kernel_Length;Kernel_Width;Asymmetry_Coefficient;Groove_Length
     
-    public string Variety { get; set; }
-    public float Area { get; set; }
-    public float Perimeter { get; set; }
-    public float Compactness { get; set; }
-    public float Kernel_Length { get; set; }
-    public float Kernel_Width { get; set; }
-    public float Asymmetry_Coefficient { get; set; }
-    public float Groove_Length { get; set; }
+    public double Area { get; init; }
+    public double Perimeter { get; init; }
+    public double Compactness { get; init; }
+    public double LengthOfKernel { get; init; }
+    public double WidthOfKernel { get; init; }
+    public double AsymmetryCoefficient { get; init; }
+    public double LengthOfKernelGroove { get; init; }
+    public GrainType? Variety { get; set; } // null = unlabeled
 
-    public WheatGrain(string variety, float area, float perimeter, float compactness, float kernelLength, float kernelWidth, float asymmetryCoefficient, float grooveLength)
+    public double[] ToFeatureVector() => new[]
     {
-        Variety = variety;
-        Area = area;
-        Perimeter = perimeter;
-        Compactness = compactness;
-        Kernel_Length = kernelLength;
-        Kernel_Width = kernelWidth;
-        Asymmetry_Coefficient = asymmetryCoefficient;
-        Groove_Length = grooveLength;
-    }
+        Area, Perimeter, Compactness,
+        LengthOfKernel, WidthOfKernel,
+        AsymmetryCoefficient, LengthOfKernelGroove
+    };
 }
+
+public enum GrainType { Kama, Rosa, Canadian }
