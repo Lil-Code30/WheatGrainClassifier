@@ -49,7 +49,7 @@ classDiagram
         +Label predict(WheatGrain sample)
         -List~WheatGrain~ findKNearestNeighbors(WheatGrain sample)
     }
-    +
+    
     class WheatGrain {
         -double Area
         -double Perimeter
