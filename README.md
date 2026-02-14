@@ -64,7 +64,7 @@ classDiagram
     KNNClassifier --> WheatGrain : receives
     EuclideanDistance ..|> IDistanceMetric
     ManhattanDistance ..|> IDistanceMetric
-    WheatGrain --> GrainType : returns
+    
 ```
 
 ## Farm Management System Architecture
