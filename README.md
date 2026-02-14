@@ -16,17 +16,106 @@ Install-Package Spectre.Console
 
 ```mermaid
 classDiagram
-    class Fermier
-    class Clients
-    class Ferme
-    class Grains
-    class Kama
-    class Rosa
-    class Canadian
+    class Ferme {
+        -String nomFerme
+        -String adresse
+        -Double surfaceHectares
+        -String numeroSIRET
+        -Date dateCreation
+        -List~Fermier~ employes
+        -List~Grains~ stocks
+        -List~Clients~ clients
+        +void embaucherFermier(Fermier fermier)
+        +void licencierFermier(String numeroPermis)
+        +void ajouterStock(Grains grain, Double quantiteKg)
+        +void vendreGrains(Clients client, Grains grain, Double quantiteKg)
+        +Double calculerChiffreAffairesMensuel()
+        +List~Grains~ getStocksParQualite(String qualite)
+        +Double getSuperficieCultivee()
+        +Boolean estCertifieeBio()
+    }
 
-    Ferme "1" *-- "1..*" Grains
+    class Fermier {
+        -String nom
+        -String prenom
+        -String numeroPermis
+        -Date dateEmbauche
+        -List~String~ competences
+        -Double salaireHoraire
+        +Boolean estCertifieBio()
+        +void affecterChamp(String nomChamp)
+        +Double calculerSalaireMensuel(Double heuresTravaillees)
+        +List~Grains~ recolter(String champ, Date date)
+        +void entretenirMateriel(String typeMateriel)
+    }
+
+    class Clients {
+        -String nomEntreprise
+        -String contactPrincipal
+        -String telephone
+        -String email
+        -String typeClient
+        -Boolean estFidele
+        -List~Commande~ historiqueCommandes
+        +Double calculerRemise(Double montantHT)
+        +Boolean peutAcheterEnGros()
+        +void passerCommande(Grains grain, Double quantiteKg, Date dateLivraison)
+        +Double getMontantTotalAchatsAnnuel()
+    }
+
+    class Grains {
+        <<abstract>>
+        -String nomVariete
+        -Double poidsSacsKg
+        -Double prixParKg
+        -Date dateRecolte
+        -String qualite
+        -Boolean estBio
+        +Double calculerValeurTotale()
+        +Boolean estUtilisablePourSemence()
+        +String getInfosRecolte()
+        +Double getTauxHumidite()
+    }
+
+    class Kama {
+        -String certificationKamut
+        -Double teneurProteines
+        -String origineGeographique
+        +Boolean estAdaptePainArtisanal()
+        +Double recommanderDoseSemis()
+    }
+
+    class Rosa {
+        -String resistanceMaladies
+        -Double rendementHectare
+        -String periodeCultureOptimale
+        +Double estimerRendement()
+        +Boolean resisteAuFroid()
+    }
+
+    class Canadian {
+        -String origineCanadienne
+        -Boolean estHardRed
+        -Double indiceGluten
+        +Boolean convientPainBlanc()
+        +String recommanderUtilisation()
+    }
+
+    class Commande {
+        -String numeroCommande
+        -Date dateCommande
+        -Date dateLivraison
+        -Double quantiteKg
+        -Double prixTotal
+        -Grains typeGrain
+        +Double calculerPrixTotalAvecRemise(Double pourcentageRemise)
+        +Boolean estLivre()
+    }
+
     Ferme "1" *-- "1..*" Fermier
+    Ferme "1" *-- "0..*" Grains
     Ferme "1" --> "0..*" Clients : à
+    Clients "1" *-- "0..*" Commande
     Kama <|-- Grains
     Rosa <|-- Grains
     Canadian <|-- Grains
