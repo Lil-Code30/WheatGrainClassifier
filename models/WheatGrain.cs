@@ -7,17 +7,17 @@ public class WheatGrain
     public double Area { get; init; }
     public double Perimeter { get; init; }
     public double Compactness { get; init; }
-    public double LengthOfKernel { get; init; }
-    public double WidthOfKernel { get; init; }
-    public double AsymmetryCoefficient { get; init; }
-    public double LengthOfKernelGroove { get; init; }
-    public GrainType? Variety { get; set; } // null = unlabeled
+    public double Kernel_Length { get; init; }
+    public double Kernel_Width { get; init; }
+    public double Asymmetry_Coefficient { get; init; }
+    public double Groove_Length { get; init; }
+    public GrainType Variety { get; set; } 
 
     public double[] ToFeatureVector() => new[]
     {
         Area, Perimeter, Compactness,
-        LengthOfKernel, WidthOfKernel,
-        AsymmetryCoefficient, LengthOfKernelGroove
+        Kernel_Length, Kernel_Width,
+        Asymmetry_Coefficient, Groove_Length
     };
 }
 

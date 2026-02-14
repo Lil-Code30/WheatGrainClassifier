@@ -3,11 +3,15 @@ using Spectre.Console;
 
 try
 {
-    // seeds_dataset_test.csv
+    // seeds_dataset_test.csv & seeds_dataset_training.csv
 
-    var list = CSVLoader.Reader("seeds_dataset_test.csv");
+    // load training data
+    var apprentissage = CSVLoader.Reader("seeds_dataset_training.csv");
 
-    foreach (var item in list)
+    // load testing data 
+    var test = CSVLoader.Reader("seeds_dataset_test.csv");
+
+    foreach (var item in test)
     {
         Console.WriteLine($"Variety : {item.Variety} , Area : {item.Area} ");
     }

@@ -1,6 +1,8 @@
 using System.Globalization;
 using CsvHelper;
+using CsvHelper.Configuration;
 using WheatGrainClassifier.models;
+using Spectre.Console;
 
 namespace WheatGrainClassifier.services;
 
@@ -9,25 +11,44 @@ public class CSVLoader
 {
     public static List<WheatGrain> Reader(string filename)
     {
-        if (!File.Exists(filename))
-            if (!File.Exists(filename))
-            {
-                throw new FileNotFoundException("File not found", filename);
-            }
-        
+
         List<WheatGrain> wheatGrains = new List<WheatGrain>();
-        
-        using (var reader = new StreamReader(filename))
-        using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+
+        if (!File.Exists(filename))
         {
-            var records = csv.GetRecords<WheatGrain>();
+            throw new FileNotFoundException("File not found", filename);
+        }
 
+        // csv config
+        var config = new CsvConfiguration(CultureInfo.InstalledUICulture)
+        {
+            Delimiter = ";",
+            HasHeaderRecord = true,
+            MissingFieldFound = null,
+            HeaderValidated = null
+        };
 
-            foreach (var record in records)
+        try
+        {
+            using (var reader = new StreamReader(filename))
+            using (var csv = new CsvReader(reader, config))
             {
-                wheatGrains.Add(record);
+                var records = csv.GetRecords<WheatGrain>();
+
+
+                foreach (var record in records)
+                {
+                    
+                    wheatGrains.Add(record);
+                }
             }
-        }    
+
+        } 
+        catch (Exception ex)
+        {
+            AnsiConsole.MarkupLineInterpolated($"[bold red]✗ Error:[/] when loading csv file - {ex.Message}");
+            throw;
+        }
         
         return wheatGrains;
     }
