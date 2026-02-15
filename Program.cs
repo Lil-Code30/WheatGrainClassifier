@@ -1,19 +1,26 @@
 ﻿using WheatGrainClassifier.services;
 using Spectre.Console;
+using WheatGrainClassifier.classifiers;
 
 try
 {
     // seeds_dataset_test.csv & seeds_dataset_training.csv
 
     // load training data
-    var apprentissage = CSVLoader.Reader("seeds_dataset_training.csv");
-
+    var training = CSVLoader.Reader("seeds_dataset_training.csv");
     // load testing data 
     var test = CSVLoader.Reader("seeds_dataset_test.csv");
 
+    int k = 2;
+    var distanceMetric = new EuclideanDistance();
+
+    KNNClassifier knn = new KNNClassifier(k, distanceMetric, training);
+
     foreach (var item in test)
     {
-        Console.WriteLine($"Variety : {item.Variety} , Area : {item.Area} ");
+        string prediction = knn.predict(item);
+
+        Console.WriteLine($"Variety : {prediction} , Area : {item.Area} ");
     }
 }
 catch (FileNotFoundException)
