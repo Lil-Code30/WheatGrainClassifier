@@ -3,7 +3,7 @@
 namespace WheatGrainClassifier.classifiers
 {
 
-    public class EuclideanDistance : IDistance
+    public class EuclideanDistance : IDistanceMetric
     {
         public double Calculate(WheatGrain a, WheatGrain b)
         {

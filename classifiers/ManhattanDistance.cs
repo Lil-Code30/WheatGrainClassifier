@@ -2,7 +2,7 @@
 
 namespace WheatGrainClassifier.classifiers
 {
-    public class ManhattanDistance : IDistance
+    public class ManhattanDistance : IDistanceMetric
     {
         public double Calculate(WheatGrain a, WheatGrain b)
         {
