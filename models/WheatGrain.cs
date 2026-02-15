@@ -1,4 +1,3 @@
-using CsvHelper.Configuration.Attributes;
 namespace WheatGrainClassifier.models;
 
 public class WheatGrain
@@ -13,12 +12,6 @@ public class WheatGrain
     public double Groove_Length { get; init; }
     public GrainType Variety { get; set; } 
 
-    public double[] ToFeatureVector() => new[]
-    {
-        Area, Perimeter, Compactness,
-        Kernel_Length, Kernel_Width,
-        Asymmetry_Coefficient, Groove_Length
-    };
 }
 
 public enum GrainType { Kama, Rosa, Canadian }

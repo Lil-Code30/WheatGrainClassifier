@@ -44,9 +44,9 @@ classDiagram
     class KNNClassifier {
         -int k
         -IDistanceMetric distanceMetric
-        -List~WheatGrain~ trainingData
-        +KNNClassifier(int k, IDistanceMetric metric)
-        +Label predict(WheatGrain sample)
+        -List~WheatGrain~ trainingGrains
+        +KNNClassifier(int k, IDistanceMetric metric, List~WheatGrain~ trainingData)
+        +string predict(WheatGrain sample)
         -List~WheatGrain~ findKNearestNeighbors(WheatGrain sample)
     }
     
@@ -58,8 +58,7 @@ classDiagram
         -double WidthOfKernel
         -double AsymmetryCoefficient
         -double LengthOfKernelGroove
-        -GrainType? Variety
-        +double[] ToFeatureVector()
+        -GrainType Variety
         
     }
 
