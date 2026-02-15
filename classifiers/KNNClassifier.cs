@@ -48,8 +48,10 @@ namespace WheatGrainClassifier.classifiers
                 double d = distanceMetric.Calculate(sample, trainGrain);
                 allNeighbors.Add(new Neighbor { WheatGrain = trainGrain, Distance = d });
             }
+            
+            allNeighbors = allNeighbors.OrderBy(x => x.Distance).ToList();
 
-            return allNeighbors.Take(this.k).ToList();
+            return allNeighbors.Take(k).ToList();
         }
     }
 }
