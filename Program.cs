@@ -15,16 +15,9 @@ try
     var distanceMetric = new EuclideanDistance();
 
     KNNClassifier knn = new KNNClassifier(k, distanceMetric, training);
-
-    var predictResult = new List<string>();
-    int j = 1;
-    foreach (var item in test)
-    {
-        string prediction = knn.predict(item);
-        predictResult.Add(prediction);
-        Console.WriteLine($"{j} - Predicted Variety : {prediction} => Real Variety : {item.Variety}");
-        j++;
-    }
+    
+    // executing the knn algo on the test data
+    var predictResult = knn.run(test);
     
     // Measure Performance 
     int correctly_classified = 0;
