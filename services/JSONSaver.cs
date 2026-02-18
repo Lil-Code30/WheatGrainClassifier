@@ -25,9 +25,6 @@ public class JSONSaver
         resultHistories.Add(data);
         
         string serilize_data = JsonConvert.SerializeObject(resultHistories,  Formatting.Indented);
-        using (StreamWriter sw = new StreamWriter(filename))
-        {
-            sw.Write(serilize_data);
-        }
+        File.WriteAllText(filename, serilize_data);
     }
 }
