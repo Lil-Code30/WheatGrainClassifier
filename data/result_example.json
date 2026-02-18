@@ -1,0 +1,62 @@
+[
+  {
+    "k": 2,
+    "DistanceMetric": "EuclideanDistance",
+    "CreatedAt": "2/17/2026 12:00:00 AM",
+    "TestData": [
+      {
+        "Variety": "Canadian",
+        "Area": 12.37,
+        "Perimeter": 13.47,
+        "Compactness": 0.8567,
+        "Kernel_Length": 5.204,
+        "Kernel_Width": 2.96,
+        "Asymmetry_Coefficient": 3.919,
+        "Groove_Length": 5.001
+      },
+      {
+        "Variety": "Rosa",
+        "Area": 12.37,
+        "Perimeter": 13.47,
+        "Compactness": 0.8567,
+        "Kernel_Length": 5.204,
+        "Kernel_Width": 2.96,
+        "Asymmetry_Coefficient": 3.919,
+        "Groove_Length": 5.001
+      },
+      {
+        "Variety": "Canadian",
+        "Area": 12.37,
+        "Perimeter": 13.47,
+        "Compactness": 0.8567,
+        "Kernel_Length": 5.204,
+        "Kernel_Width": 2.96,
+        "Asymmetry_Coefficient": 3.919,
+        "Groove_Length": 5.001
+      }
+    ],
+    "TrainingData": [
+      {
+        "Variety": "Canadian",
+        "Area": 12.37,
+        "Perimeter": 13.47,
+        "Compactness": 0.8567,
+        "Kernel_Length": 5.204,
+        "Kernel_Width": 2.96,
+        "Asymmetry_Coefficient": 3.919,
+        "Groove_Length": 5.001
+      },
+      {
+        "Variety": "Rosa",
+        "Area": 12.37,
+        "Perimeter": 13.47,
+        "Compactness": 0.8567,
+        "Kernel_Length": 5.204,
+        "Kernel_Width": 2.96,
+        "Asymmetry_Coefficient": 3.919,
+        "Groove_Length": 5.001
+      }
+    ],
+    "Accuracy": 84.89
+  }
+]
