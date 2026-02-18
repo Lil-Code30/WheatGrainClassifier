@@ -1,9 +1,17 @@
 # Wheat Grain Classifier
 
-Une application console en C# qui classe automatiquement des grains de blé (variétés Kama, Rosa et Canadian) à l'aide de l'algorithme k-plus proches voisins (k-NN).
+A console application in C# that automatically classify wheat grains (variety : Kama, Rosa, Canadian) with the help of [K-Nearest Neighbor(KNN) Algorithm](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm)
 
+## Installation
 
-## Installez les packages NuGet nécessaires 
+### 1. Clone this repository
+
+```bash
+git clone https://github.com/Lil-Code30/WheatGrainClassifier.git
+
+cd WheatGrainClassifier
+```
+### 2. Install the required Nuget Packages
 
 ```bash
 Install-Package CsvHelper
@@ -11,6 +19,17 @@ Install-Package Newtonsoft.Json
 Install-Package Spectre.Console
 
 ```
+### 3. Files needed
+
+The files needed to run this code are located in the folder `/data`
+
+- **Test seeds data:** `seeds_dataset_test.csv`
+- **Training seeds data:** `seeds_dataset_training.csv`
+
+## How the program works
+
+> The csv header : Variety;Area;Perimeter;Compactness;Kernel_Length;Kernel_Width;Asymmetry_Coefficient;Groove_Length
+> Which is related to the `WheatGrain.cs` class
 
 ## Distance Metrics Used in KNN Algorithm
 KNN uses distance metrics to identify nearest neighbor, these neighbors are used for classification and regression task. To identify nearest neighbor we use below distance metrics:
