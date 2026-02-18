@@ -1,6 +1,7 @@
 ﻿using WheatGrainClassifier.services;
 using Spectre.Console;
 using WheatGrainClassifier.classifiers;
+using WheatGrainClassifier.models;
 
 try
 {
@@ -45,6 +46,27 @@ try
     Console.WriteLine($"Correctly Classified Count : {correctly_classified}");
     Console.WriteLine($"Accuracy on test set by our model: {accuracy:0.00}%");
     
+    // creating a resultHistory instance
+    ResultHistory resultHistory = new ResultHistory(k,"Euclidean Distance", test, training, accuracy);
+    
+    // List of result History    
+    List<ResultHistory> resultHistories = new List<ResultHistory>();
+    resultHistories.Add(resultHistory);
+    
+    // Saving the result histories in the json file
+    
+    string filePath = "result_history.json";
+    
+    Console.WriteLine("Saving predictions result...");
+
+    if (File.Exists(filePath))
+    {
+        JSONSaver.Modify(filePath, resultHistory);
+    }
+    else
+    {
+        JSONSaver.Save(filePath, resultHistories);
+    }
 }
 catch (FileNotFoundException)
 {
