@@ -21,29 +21,9 @@ try
     var predictResult = knn.run(test);
     
     // Measure Performance 
-    int correctly_classified = 0;
-    
-    if (test.Count != predictResult.Count)
-    {
-        throw new Exception("Test and prediction counts do not match.");
-    }
-
-    for (int i = 0; i < predictResult.Count; i++)
-    {
-      string prediction = predictResult[i];
-      string testItem = test[i].Variety.ToString();
-
-      if (string.Equals(prediction, testItem, StringComparison.OrdinalIgnoreCase))
-      {
-          correctly_classified++;
-      }
-      
-    }
-    
     // Accuracy on test set by our model
-    double accuracy = ((double)correctly_classified / predictResult.Count) * 100;
+    double accuracy = PerformanceMeasurement.accuracy(test, predictResult);
     
-    Console.WriteLine($"Correctly Classified Count : {correctly_classified}");
     Console.WriteLine($"Accuracy on test set by our model: {accuracy:0.00}%");
     
     // creating a resultHistory instance
