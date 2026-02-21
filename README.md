@@ -2,6 +2,8 @@
 
 A console application in C# that automatically classify wheat grains (variety : Kama, Rosa, Canadian) with the help of [K-Nearest Neighbor(KNN) Algorithm](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm)
 
+![App Menu image](./Assets/app-menu.png)
+
 ## Installation
 
 ### 1. Clone this repository
