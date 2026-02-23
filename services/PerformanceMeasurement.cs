@@ -4,7 +4,7 @@ namespace WheatGrainClassifier.services;
 
 public class PerformanceMeasurement
 {
-    public static double accuracy(List<WheatGrain> testData, List<string> predictedLabels)
+    public static double accuracy(List<string> testData, List<string> predictedLabels)
     {
         int correctly_classified = 0;
 
@@ -16,7 +16,7 @@ public class PerformanceMeasurement
         for (int i = 0; i < predictedLabels.Count; i++)
         {
             string prediction = predictedLabels[i];
-            string testLabel = testData[i].Variety.ToString();
+            string testLabel = testData[i];
 
             if (string.Equals(prediction, testLabel, StringComparison.OrdinalIgnoreCase))
             {

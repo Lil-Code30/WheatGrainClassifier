@@ -5,18 +5,17 @@ using WheatGrainClassifier.models;
 
 try
 {
-    //AnsiConsole.MarkupLine("[bold blue] Wheat Grain Classifier [/]");
-    //AnsiConsole.WriteLine("About:: A console application that automatically classify wheat grains with the help of K-Nearest Neighbor(KNN) Algorithm");
     ShowIntro();
+    
     // interactive menu
-    var trainingDataPath = AnsiConsole.Prompt(
+    var trainDataPath = AnsiConsole.Prompt(
         new TextPrompt<string>("[green] Enter the path to the training data csv file: [/]")
         .Validate(f => string.IsNullOrWhiteSpace(f)
         ? ValidationResult.Error("[red] invalide file path")
         : ValidationResult.Success()));
 
     // load training data
-    var training = CSVLoader.Reader(trainingDataPath);
+    var trainData = CSVLoader.Reader(trainDataPath);
 
     var testDataPath = AnsiConsole.Prompt(
         new TextPrompt<string>("[green] Enter the path to the test data csv file:[/]")
@@ -25,7 +24,7 @@ try
         : ValidationResult.Success()));
 
     // load testing data 
-    var test = CSVLoader.Reader(testDataPath);
+    var testData = CSVLoader.Reader(testDataPath);
 
     int k = AnsiConsole.Prompt(
         new TextPrompt<int>("[green] Enter the value of k to use in the algorithm:[/]")
@@ -38,32 +37,39 @@ try
         new SelectionPrompt<string>()
         .Title("[green] Which distance to you what to use for the prediction?[/]")
         .AddChoices(new[] { "Euclidean Distance", "Manhattan Distance" }));
-
    
-
+    // Distance choice
     IDistanceMetric distanceMetric = distanceMetricChoice == "Euclidean Distance" ? new EuclideanDistance() : new ManhattanDistance();
 
-    KNNClassifier knn = new KNNClassifier(k, distanceMetric, training);
     
-    // executing the knn algo on the test data
-    var predictResult = knn.run(test);
+    
+    // 2. Training and prediction
+    KNNClassifier knn = new KNNClassifier(k, distanceMetric, trainData);
 
-    AnsiConsole.MarkupLineInterpolated($"[bold green] Distance metric used: {distanceMetricChoice} [/]");
+    List<string> actualVariety = new List<string>();
+    List<string> predictedVariety = new List<string>();
 
-    // Measure Performance 
+    foreach (var grain in testData)
+    {
+        string prediction = knn.predict(grain);
+        predictedVariety.Add(prediction);
+        actualVariety.Add(grain.Variety.ToString());
+    }
+
+    // 3. Calculating Performance
     // Accuracy on test set by our model
-    double accuracy = PerformanceMeasurement.accuracy(test, predictResult);
+    double accuracy = PerformanceMeasurement.accuracy(actualVariety, predictedVariety);
     
+    Console.WriteLine();
+    AnsiConsole.MarkupLineInterpolated($"[bold green] Distance metric used: {distanceMetricChoice} [/]");
     AnsiConsole.MarkupLineInterpolated($"[bold green] Accuracy on test set by our model: {accuracy:0.00}% [/]");
-
-    // creating a resultHistory instance
-    ResultHistory resultHistory = new ResultHistory(k, distanceMetricChoice, test, training, accuracy);
+    
+    // 4. Storing the performance result in the JSON file
+    ResultHistory resultHistory = new ResultHistory(k, distanceMetricChoice, testData, trainData, accuracy);
     
     // List of result History    
     List<ResultHistory> resultHistories = new List<ResultHistory>();
     resultHistories.Add(resultHistory);
-    
-    // Saving the result histories in the json file
     
     string filePath = "result_history.json";
     
@@ -77,8 +83,13 @@ try
     {
         JSONSaver.Save(filePath, resultHistories);
     }
-
+    
+    Console.WriteLine();
+    Thread.Sleep(2000);
     AnsiConsole.MarkupLine("[green] Result History successfully saved. :) [/]");
+    
+    Console.WriteLine("\nPress any key to exit...");
+    Console.ReadKey();
 }
 catch (FileNotFoundException)
 {

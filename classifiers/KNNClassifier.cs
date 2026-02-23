@@ -53,21 +53,5 @@ namespace WheatGrainClassifier.classifiers
 
             return allNeighbors.Take(k).ToList();
         }
-
-        public List<string> run(List<WheatGrain> samples)
-        {
-            var predictResult = new List<string>();
-            
-            int j = 1;
-            foreach (var item in samples)
-            {
-                string prediction = this.predict(item);
-                predictResult.Add(prediction);
-                // Console.WriteLine($"{j} - Predicted Variety : {prediction} => Real Variety : {item.Variety}");
-                j++;
-            }
-            
-            return predictResult;
-        }
     }
 }
