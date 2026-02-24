@@ -46,19 +46,19 @@ try
     // 2. Training and prediction
     KNNClassifier knn = new KNNClassifier(k, distanceMetric, trainData);
 
-    List<string> actualVariety = new List<string>();
-    List<string> predictedVariety = new List<string>();
+    List<string> actualVarieties = new List<string>();
+    List<string> predictedVarieties = new List<string>();
 
     foreach (var grain in testData)
     {
         string prediction = knn.predict(grain);
-        predictedVariety.Add(prediction);
-        actualVariety.Add(grain.Variety.ToString());
+        predictedVarieties.Add(prediction);
+        actualVarieties.Add(grain.Variety.ToString());
     }
 
     // 3. Calculating Performance
     // Accuracy on test set by our model
-    double accuracy = PerformanceMeasurement.accuracy(actualVariety, predictedVariety);
+    double accuracy = PerformanceMeasurement.accuracy(actualVarieties, predictedVarieties);
     
     Console.WriteLine();
     AnsiConsole.MarkupLineInterpolated($"[bold green] Distance metric used: {distanceMetricChoice} [/]");

@@ -1,4 +1,5 @@
 ﻿using WheatGrainClassifier.models;
+using WheatGrainClassifier.services;
 
 namespace WheatGrainClassifier.classifiers
 {
@@ -49,7 +50,13 @@ namespace WheatGrainClassifier.classifiers
                 allNeighbors.Add(new Neighbor { WheatGrain = trainGrain, Distance = d });
             }
             
-            allNeighbors = allNeighbors.OrderBy(x => x.Distance).ToList();
+            // allNeighbors = allNeighbors.OrderBy(x => x.Distance).ToList();
+            Sorter.QuickSort(allNeighbors);
+
+            foreach (Neighbor neighbor in allNeighbors)
+            {
+                Console.WriteLine($"{neighbor.WheatGrain.Variety}: {neighbor.Distance}");
+            }
 
             return allNeighbors.Take(k).ToList();
         }
