@@ -8,9 +8,10 @@ public class ResultHistory
     public List<WheatGrain> TestData { get; set;}
     public List<WheatGrain> TrainingData { get; set; }
     public double Accuracy { get; set; }
+    public int[,]  MatrixConfusion {get; set;}
     // private List<WheatGrain> PredictedResult { get; }
 
-    public ResultHistory(int k, string distanceMetric, List<WheatGrain> testData,  List<WheatGrain> trainingData, double accuracy)
+    public ResultHistory(int k, string distanceMetric, List<WheatGrain> testData,  List<WheatGrain> trainingData, double accuracy, int[,] matrix)
     {
         K = k;
         DistanceMetric = distanceMetric;
@@ -18,6 +19,7 @@ public class ResultHistory
         TestData = testData;
         TrainingData = trainingData;
         Accuracy = accuracy;
+        MatrixConfusion = matrix;
     }
     
 }

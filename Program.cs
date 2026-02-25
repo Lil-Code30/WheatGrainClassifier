@@ -58,14 +58,21 @@ try
 
     // 3. Calculating Performance
     // Accuracy on test set by our model
+    
+    AnsiConsole.MarkupLine("[green] Calculating the model accuracy... [/]");
     double accuracy = PerformanceMeasurement.accuracy(actualVarieties, predictedVarieties);
+    Thread.Sleep(2000);
+    
+    AnsiConsole.MarkupLine("[green] Calculating the confusion matrix... [/]");
+    int[,] matrix = PerformanceMeasurement.confusionMatrix(actualVarieties, predictedVarieties, 3);
+    Thread.Sleep(2000);
     
     Console.WriteLine();
     AnsiConsole.MarkupLineInterpolated($"[bold green] Distance metric used: {distanceMetricChoice} [/]");
     AnsiConsole.MarkupLineInterpolated($"[bold green] Accuracy on test set by our model: {accuracy:0.00}% [/]");
     
     // 4. Storing the performance result in the JSON file
-    ResultHistory resultHistory = new ResultHistory(k, distanceMetricChoice, testData, trainData, accuracy);
+    ResultHistory resultHistory = new ResultHistory(k, distanceMetricChoice, testData, trainData, accuracy,  matrix);
     
     // List of result History    
     List<ResultHistory> resultHistories = new List<ResultHistory>();
@@ -73,6 +80,7 @@ try
     
     string filePath = "result_history.json";
     
+    Console.WriteLine();
     AnsiConsole.MarkupLine("[green] Saving predictions result... [/]");
 
     if (File.Exists(filePath))
