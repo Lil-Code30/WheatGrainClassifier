@@ -52,12 +52,6 @@ namespace WheatGrainClassifier.classifiers
             
             // allNeighbors = allNeighbors.OrderBy(x => x.Distance).ToList();
             Sorter.QuickSort(allNeighbors);
-
-            foreach (Neighbor neighbor in allNeighbors)
-            {
-                Console.WriteLine($"{neighbor.WheatGrain.Variety}: {neighbor.Distance}");
-            }
-
             return allNeighbors.Take(k).ToList();
         }
     }
