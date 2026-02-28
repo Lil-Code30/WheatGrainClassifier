@@ -68,6 +68,37 @@ try
     Thread.Sleep(2000);
     
     Console.WriteLine();
+    
+    var table = new Table();
+    table.Border(TableBorder.Rounded);
+    table.Title("[bold blue]Confusion Matrix[/]");
+    
+    table.AddColumn("[grey]Actual \\ Predicted[/]");
+    var grainTypes = Enum.GetNames(typeof(GrainType));
+    foreach (var name in grainTypes)
+    {
+        table.AddColumn($"[bold]{name}[/]");
+    }
+    
+    for (int i = 0; i < grainTypes.Length; i++)
+    {
+        var rowData = new List<string> { $"[bold]{grainTypes[i]}[/]" };
+        for (int j = 0; j < grainTypes.Length; j++)
+        {
+            int count = matrix[i, j];
+            if (i == j && count > 0)
+                rowData.Add($"[green]{count}[/]");
+            else if (count > 0)
+                rowData.Add($"[red]{count}[/]");
+            else
+                rowData.Add($"[grey]{count}[/]");
+        }
+        table.AddRow(rowData.ToArray());
+    }
+    
+    AnsiConsole.Write(table);
+    Console.WriteLine();
+
     AnsiConsole.MarkupLineInterpolated($"[bold green] Distance metric used: {distanceMetricChoice} [/]");
     AnsiConsole.MarkupLineInterpolated($"[bold green] Accuracy on test set by our model: {accuracy:0.00}% [/]");
     

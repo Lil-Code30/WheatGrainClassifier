@@ -40,12 +40,22 @@ public class PerformanceMeasurement
             throw new ArgumentException("The two List should have the same length.");
         }
         
-        
-        int[,] matrix = new int[0,0];
+        int[,] matrix = new int[numberOfVarieties, numberOfVarieties];
 
         for (int i = 0; i < actualVarieties.Count; i++)
         {
-            // int actual = Convert.ToInt32(actualVarieties[i]);
+            // Parse strings back to GrainType enum to get their integer indices (0: Kama, 1: Rosa, 2: Canadian)
+            if (Enum.TryParse(typeof(GrainType), actualVarieties[i], true, out var actualObj) &&
+                Enum.TryParse(typeof(GrainType), predictedVarieties[i], true, out var predictedObj))
+            {
+                int actualIndex = (int)actualObj;
+                int predictedIndex = (int)predictedObj;
+
+                if (actualIndex < numberOfVarieties && predictedIndex < numberOfVarieties)
+                {
+                    matrix[actualIndex, predictedIndex]++;
+                }
+            }
         }
 
         return matrix;
